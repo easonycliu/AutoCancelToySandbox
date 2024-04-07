@@ -7,18 +7,18 @@ import java.util.concurrent.ConcurrentMap;
 public class RequestRecord {
 	private ConcurrentMap<Long, Integer> finishedRequestRecord;
 
-	private ConcurrentMap<String, Integer> requestPenaltyMilli;
+	private ConcurrentMap<String, Long> requestPenaltyMilli;
 
 	public RequestRecord() {
 		this.finishedRequestRecord = new ConcurrentHashMap<Long, Integer>();
-		this.requestPenaltyMilli = new ConcurrentHashMap<String, Integer>(Map.ofEntries(
-			Map.entry("abnormal", (Integer) Settings.getSetting("abnormal_request_base_penalty_milli")),
-			Map.entry("normal", (Integer) Settings.getSetting("normal_request_base_penalty_milli"))
+		this.requestPenaltyMilli = new ConcurrentHashMap<String, Long>(Map.ofEntries(
+			Map.entry("abnormal", (Long) Settings.getSetting("abnormal_request_base_penalty_milli")),
+			Map.entry("normal", (Long) Settings.getSetting("normal_request_base_penalty_milli"))
 		));
 	}
 
-	public Integer getPenaltyMilli(RequestInfo requestInfo) {
-		return this.requestPenaltyMilli.getOrDefault(requestInfo.getRequestType(), 0);
+	public Long getPenaltyMilli(RequestInfo requestInfo) {
+		return this.requestPenaltyMilli.getOrDefault(requestInfo.getRequestType(), 0L);
 	}
 
 	public void updateRequestRecord(RequestInfo requestInfo) {
@@ -33,7 +33,7 @@ public class RequestRecord {
 		);
 	}
 
-	private Integer updatePeneltyMilli(Integer oldPenalty, Integer currentThroughput, Long requestLatency) {
+	private Long updatePeneltyMilli(Long oldPenalty, Integer currentThroughput, Long requestLatency) {
 		return oldPenalty;
 	}
 }

@@ -5,14 +5,16 @@ import java.util.function.Function;
 public class ToySandbox {
 	private static final boolean sandboxEnable = Boolean.valueOf(Settings.getFromJVMOrDefault("sandbox.enable", "false"));
 
-	private static Function<Object, RequestInfo> requestParser;
+	private static Function<Object, RequestInfo> requestParser = null;
 
-	private static RequestRecord requestRecord;
+	private static RequestRecord requestRecord = null;
 
 	public static void start(Function<Object, RequestInfo> requestParser) {
 		if (ToySandbox.sandboxEnable) {
-			ToySandbox.requestParser = requestParser;
-			ToySandbox.requestRecord = new RequestRecord();
+			if (ToySandbox.requestParser == null && ToySandbox.requestRecord == null) {
+				ToySandbox.requestParser = requestParser;
+				ToySandbox.requestRecord = new RequestRecord();
+			}
 		}
 	}
 
