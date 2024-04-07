@@ -11,7 +11,7 @@ public class RequestInfo {
 	}
 
 	public String getRequestType() {
-		return this.requestType;
+		return requestType;
 	}
 
 	public Long getStartTimeMilli() {

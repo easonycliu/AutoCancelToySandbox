@@ -12,8 +12,8 @@ public class RequestRecord {
 	public RequestRecord() {
 		this.finishedRequestRecord = new ConcurrentHashMap<Long, Integer>();
 		this.requestPenaltyMilli = new ConcurrentHashMap<String, Integer>(Map.ofEntries(
-			Map.entry("criminal", (Integer) Settings.getSetting("criminal")),
-			Map.entry("normal", (Integer) Settings.getSetting("normal"))
+			Map.entry("abnormal", (Integer) Settings.getSetting("abnormal_request_base_penalty_milli")),
+			Map.entry("normal", (Integer) Settings.getSetting("normal_request_base_penalty_milli"))
 		));
 	}
 
