@@ -33,3 +33,4 @@ tasks.named('test') {
 }
 
 archivesBaseName = 'toysandbox'
+version = '0.0.1'
